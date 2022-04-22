@@ -30,8 +30,9 @@ const exo = {
     }
   },
 
-
+  
   availability() {
+    // mettre un let ou var avant la déclaration de variable
     availability= document.getElementById('availability')
     if(base.getHour < 8 || base.getHour > 20) {
       availability.classList.add('off')
@@ -50,6 +51,8 @@ const exo = {
     profil.textContent= `${exo.newPseudo.prenom} du ${exo.newPseudo.NuméroDeDépartement}`  
   },
 
+// peut être mettre ces 2 variables en haut avec les autres ou dans la méthode qui s'en sert
+
   toggler: document.getElementById('menu-toggler'),
   headerBanner: document.getElementById('header-banner'),
   
@@ -62,7 +65,6 @@ const exo = {
         exo.headerBanner.classList.remove('banner--open')
       }
     })
-    
   },
 
   contact: document.getElementById('contact'),
