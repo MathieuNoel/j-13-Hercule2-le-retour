@@ -58,7 +58,7 @@ const exo = {
   
   menu() { 
     exo.toggler.addEventListener('click', function(event){
-     // attention ici tu attribues la valeur 'click' à event, il faut un == ou === pour comparer
+     // attention ici tu attribues la valeur 'click' à event, il faut un == ou === pour comparer, du coup le menu ne se ferme pas 
       if(event = 'click') {
         exo.headerBanner.classList.add('banner--open')
       }else if(event = 'click') {
@@ -82,6 +82,7 @@ const exo = {
   voteCesar: document.getElementById('trends-cesar'),
   vote() {
     // là aussi ne pas oublier le ";"
+    // le calcul n'est pas dynamique, ça ne s'affiche pas
     exo.votehercule = `${base.vote.hercule} / 173 * 100 `;
     exo.voteCesar = `${base.vote.cesar} / 173 * 100 `;
   }
