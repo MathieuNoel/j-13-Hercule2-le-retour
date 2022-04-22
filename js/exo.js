@@ -9,7 +9,7 @@ const exo = {
   },
   Hercule: {
     name: 'Hercule',
-    job: 'Demis-dieu',
+    job: 'Demis-dieu', // oups presque la bonne valeur
     age: 35,
     department: 75,
     arm: 60.5,
@@ -21,11 +21,16 @@ const exo = {
     'Alcmène',
     'Déjanire'
   ],
+
+
+  // la boucle ne va qu'au 11ème élément, pas le 12eme ! ( on peut corriger ça en utilisant un <= ou < 12)
   work() {
     for(let i = 0; i < 11; i++) {
       base.displayWork(i)
     }
   },
+
+
   availability() {
     availability= document.getElementById('availability')
     if(base.getHour < 8 || base.getHour > 20) {
@@ -34,12 +39,13 @@ const exo = {
       availability.classList.remove('off')
     }
   },
+
   newPseudo: {
     prenom:'Hercule',    
     NuméroDeDépartement: 75,
   },
-  profil() {
-    
+
+  profil() {  
     let profil= document.getElementById('profil-name');
     profil.textContent= `${exo.newPseudo.prenom} du ${exo.newPseudo.NuméroDeDépartement}`  
   },
@@ -49,6 +55,7 @@ const exo = {
   
   menu() { 
     exo.toggler.addEventListener('click', function(event){
+     // attention ici tu attribues la valeur 'click' à event, il faut un == ou === pour comparer
       if(event = 'click') {
         exo.headerBanner.classList.add('banner--open')
       }else if(event = 'click') {
@@ -57,23 +64,29 @@ const exo = {
     })
     
   },
+
   contact: document.getElementById('contact'),
+  
+  // ne pas oublier le ";"  l 73
   submit() {
-  exo.contact.addEventListener('submit', (event) => {
-    
+    exo.contact.addEventListener('submit', (event) => {
       event.preventDefault()
-      alert('Hercule ne souhaite pas être dérangé')
-    
-  }
-  )
+      alert('Hercule ne souhaite pas être dérangé');
+    })
   },
+
+
   votehercule: document.getElementById('trends-hercule'),
   voteCesar: document.getElementById('trends-cesar'),
   vote() {
-    exo.votehercule = `${base.vote.hercule} / 173 * 100 `
-    exo.voteCesar = `${base.vote.cesar} / 173 * 100 `
+    // là aussi ne pas oublier le ";"
+    exo.votehercule = `${base.vote.hercule} / 173 * 100 `;
+    exo.voteCesar = `${base.vote.cesar} / 173 * 100 `;
   }
 }
+
+// on pourrait rassembler tout ça dans une méthode interne au module qu'on appelerait init puis appeler app.init();
+// idem pour les ";"
 exo.title()
 base.fillProfil(exo.Hercule)
 base.printFriends(exo.Friends)
