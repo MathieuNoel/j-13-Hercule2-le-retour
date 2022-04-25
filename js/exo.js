@@ -12,6 +12,7 @@ const exo = {
     exo.menu();
     exo.submit();
     exo.vote()
+    exo.displayActivities()
   },
   //Étape 4 - DOM
   title() {
@@ -95,7 +96,18 @@ const exo = {
     document.querySelector('#trends-hercule > .people__bar').style.width = `${herculePopularity}%`;
     document.querySelector('#trends-cesar > .people__bar').style.width = `${cesarPopularity}%`;
   },
-  
+  // (Bonus) Etape 12
+  displayActivities: function(){
+    document.getElementById('activities').classList.remove('hidden');
+    const activities = document.querySelector('#activities .tasks');
+    for(let i=0;i<base.activities.length;i++){
+      if(base.activities[i].author === 'Hercule' && base.activities[i].finished === true){
+        const activityList = document.createElement('li');
+        activityList.textContent = `${base.activities[i].title}`;
+        activities.appendChild(activityList);
+      }
+    }
+  },
 }
 
 
