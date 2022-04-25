@@ -1,87 +1,102 @@
-// console.log('test 1...2...1...2');
+// console.log('test 1...2...1...2'); Étape 1 - Exécuter quelque chose
+// Bonus Étape 11 - Objet avancé
 const exo = {
-  title() {
-    banner__title= document.createElement('h1'),
-    banner__title.classList.add('banner__title'),
-    banner__title.textContent = 'Vous consultez le profil de Hercule',
-    header_banner= document.getElementById('header-banner'),
-    header_banner.appendChild(banner__title)
+  init() {
+    exo.title();
+    base.fillProfil(exo.Hercule);//Étape 2 - Objet, Place au test
+    base.printFriends(exo.Friends);//Étape 3 - Tableau, Et un deuxième test
+    base.setBestFriend(exo.Friends[0]);// Étape 3 - Tableau, Et un deuxième test
+    exo.work();
+    exo.availability();
+    exo.profil();//Étape 7 - Fonction, Place à l'execution
+    exo.menu();
+    exo.submit();
+    exo.vote()
   },
+  //Étape 4 - DOM
+  title() {
+    let banner__title= document.createElement('h1');
+    banner__title.classList.add('banner__title');
+    banner__title.textContent = 'Vous consultez le profil de Hercule';
+    let header_banner= document.getElementById('header-banner');
+    header_banner.appendChild(banner__title);
+  },
+  // Étape 2 - Objet
   Hercule: {
     name: 'Hercule',
-    job: 'Demis-dieu',
+    job: 'Demi-dieu',
     age: 35,
     department: 75,
     arm: 60.5,
     inRelationship: true,
   },
+  // Étape 3 - Tableau
   Friends: [
     'Jupiter',
     'Junon',
     'Alcmène',
-    'Déjanire'
+    'Déjanire',
   ],
+  //Étape 5 - Boucle
   work() {
-    for(let i = 0; i < 11; i++) {
-      base.displayWork(i)
+    for(let i = 0; i < 12; i++) {
+      base.displayWork(i);
     }
   },
+  //Étape 6 - Condition
   availability() {
-    availability= document.getElementById('availability')
-    if(base.getHour < 8 || base.getHour > 20) {
-      availability.classList.add('off')
+    const availability= document.getElementById('availability');
+    if(base.getHour() > 8 && base.getHour() < 20) {
+      availability.textContent= 'disponible';
     } else {
-      availability.classList.remove('off')
+      availability.classList.add('off');
     }
   },
-  newPseudo: {
-    prenom:'Hercule',    
-    NuméroDeDépartement: 75,
+  //Étape 7 - Fonction
+  profileValue(name, department) {
+    return `${name} du ${department}`
   },
-  profil() {
-    
-    let profil= document.getElementById('profil-name');
-    profil.textContent= `${exo.newPseudo.prenom} du ${exo.newPseudo.NuméroDeDépartement}`  
+  profil() {    
+    document.getElementById('profil-name').textContent= exo.profileValue(exo.Hercule.name, exo.Hercule.department); 
   },
 
-  toggler: document.getElementById('menu-toggler'),
-  headerBanner: document.getElementById('header-banner'),
   
+  
+  //Étape 8 - Event
   menu() { 
-    exo.toggler.addEventListener('click', function(event){
-      if(event = 'click') {
-        exo.headerBanner.classList.add('banner--open')
-      }else if(event = 'click') {
-        exo.headerBanner.classList.remove('banner--open')
+    const toggler= document.getElementById('menu-toggler');
+    toggler.addEventListener('click', function(){
+      const headerBanner= document.getElementById('header-banner');
+      if(headerBanner.classList.contains('banner--open')) {
+        headerBanner.classList.remove('banner--open');
+      }else {
+        headerBanner.classList.add('banner--open');
       }
-    })
+    });
     
   },
-  contact: document.getElementById('contact'),
+  //Étape 9 - Event bis
   submit() {
-  exo.contact.addEventListener('submit', (event) => {
-    
-      event.preventDefault()
-      alert('Hercule ne souhaite pas être dérangé')
-    
-  }
-  )
+    let contact= document.getElementById('contact');
+    contact.addEventListener('submit', (event) => {  
+      event.preventDefault();
+      alert('Hercule ne souhaite pas être dérangé');  
+      }
+    )
   },
-  votehercule: document.getElementById('trends-hercule'),
-  voteCesar: document.getElementById('trends-cesar'),
-  vote() {
-    exo.votehercule = `${base.vote.hercule} / 173 * 100 `
-    exo.voteCesar = `${base.vote.cesar} / 173 * 100 `
-  }
+  //Bonus Étape 10 - Algo
+  vote() {  
+    const voteHercule= document.querySelector('#trends-hercule>.people__popularity');
+    const voteCesar= document.querySelector('#trends-cesar>.people__popularity');  
+    let herculePopularity = Math.round(base.vote.hercule/(base.vote.hercule+base.vote.cesar)*100);
+    let cesarPopularity = Math.round(base.vote.cesar/(base.vote.hercule +base.vote.cesar)*100);
+    voteHercule.textContent = `${herculePopularity}%`;
+    voteCesar.textContent = `${cesarPopularity}%`;
+    document.querySelector('#trends-hercule > .people__bar').style.width = `${herculePopularity}%`;
+    document.querySelector('#trends-cesar > .people__bar').style.width = `${cesarPopularity}%`;
+  },
+  
 }
-exo.title()
-base.fillProfil(exo.Hercule)
-base.printFriends(exo.Friends)
-base.setBestFriend(exo.Friends[0])
-exo.work()
-exo.availability()
-exo.profil()
-exo.menu()
-exo.submit()
 
 
+exo.init()
